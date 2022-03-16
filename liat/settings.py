@@ -37,6 +37,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Liat apps
+    #start up app
+    'theblog',
+    'members',
+    'landing',
+    #Brokers
+    'photos',
+    'apply',
+    'broker',
+    #allauthentication
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.coinbase',
+    'allauth.socialaccount.providers.apple',
+    'allauth.socialaccount.providers.amazon',
+    'allauth.socialaccount.providers.twitter', 
+   
 ]
 
 MIDDLEWARE = [
@@ -55,7 +77,7 @@ ROOT_URLCONF = 'liat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,12 +85,33 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
+        'builtins': [
+         'theblog.templatetags.custom_tags',
+        ]
         },
     },
 ]
 
+#authentication backends
+# Provider specific settings
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
+
 WSGI_APPLICATION = 'liat.wsgi.application'
+
+#Auto Field settings
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Database
@@ -126,7 +169,18 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'index'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
