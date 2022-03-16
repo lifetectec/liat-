@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*#0&vic=2f7y6hp@bz$=rj9qd8=u0is3d^ifm-e_0jz=fv95tl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://git.heroku.com/microsecond-app.git", '127.0.0.1']
+ALLOWED_HOSTS = ['microsecond-app.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
