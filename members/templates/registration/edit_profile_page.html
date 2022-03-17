@@ -1,0 +1,45 @@
+{% extends 'landing/base.html' %}
+{% block title %}Edit Profile Page!{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+</br>
+</br></br>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-5 col-sm-6">
+            <a href="{% url 'home'  %}" class="btn btn-light">Home</a>
+        </div>
+    </div>
+     {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-5 col-sm-12 border-bottom">
+                <h2>Edit Settings|(:+)</h2>
+            </div>
+        </div>
+        <br/><br/>
+        <div class="row justify-content-center mt-3 mb-5">
+            <div class="col-md-5 col-sm-12 border-bottom">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-warning">Update Profile Page</button>
+            </div>
+        </div>
+    
+
+    {% else %}
+
+    You're not allowed here!
+
+    {% endif %}
+
+    {% else %}
+    forbiden user to edit this page...
+    {% endif %}
+</div>
+
+{% endblock %}

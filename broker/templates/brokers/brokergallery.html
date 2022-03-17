@@ -1,0 +1,79 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+
+    <Style>
+        .image-thumbail {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<br>
+<br>
+<body class="m-5">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'brokergallery' %}">All</a>
+                        </li>
+                        {% for category in categories %}
+                        <li class=" list-group-item">
+                            <a href="{% url 'brokergallery' %}?category={{category.name}}">
+                                {{category.name}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                        <li class="list-group-item">
+                           <a href="{% url 'brokerview' %}" class="btn btn-dark btn-block btn-sm m-1 text-white">View all brokers</a>
+                        </li>
+
+                        <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Broker</a>
+                        <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+
+                    {% for broker in brokers %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{broker.image.url}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <small>Category: {{broker.category.name}}</small>
+                                <small>date: {{broker.uploaded_on}}</small>
+                                <a href="{% url 'delete-broker' broker.id %}" class="edit-color"><i class="fas fa-trash"></i></a>
+                            </div>
+                            <a href="{% url 'broker' broker.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>No Brokers {'='}</h3>
+                    {% endfor %}
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+{% endblock %}
