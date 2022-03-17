@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'photos',
     'apply',
     'broker',
+    #other
+    'ckeditor',
+    'crispy_forms',
     #allauthentication
     'allauth',
     'allauth.account',

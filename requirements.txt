@@ -9,6 +9,7 @@ distlib==0.3.4
 Django==4.0.1
 django-allauth==0.49.0
 django-ckeditor==6.2.0
+django-crispy-forms==1.14.0
 django-js-asset==2.0.0
 filelock==3.4.2
 gunicorn==20.1.0
