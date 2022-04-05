@@ -16,7 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
+# Quick-start development settings - unsuitable for production 
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Liat apps
     #start up app
-    'theblog',
+    'theblog', 
     'members',
     'landing',
     #Brokers
@@ -57,10 +57,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.coinbase',
-    'allauth.socialaccount.providers.apple',
-    'allauth.socialaccount.providers.amazon',
-    'allauth.socialaccount.providers.twitter', 
+   
    
 ]
 
@@ -113,8 +110,67 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = 'liat.wsgi.application'
 
+                #Github:
+#client_Id
+#5004a5896da870055d25
+
+#Key
+#ba1a761d61657b1dfe1f247a0399acdbecb5fc29
+
+               #facebook
+#client ID
+#1135794127201639
+#a6c3ec259b45d1a0e900cfefbe0d877e
+
 #Auto Field settings
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'offline',
+#         }
+#     }
+# }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+         'SCOPE': [
+            'profile',
+            'email',
+         ],
+         'AUTH_PARAMS': {
+             'access_type': 'offline',
+        },
+    },
+    
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        # 'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v7.0',
+    }
+}
 
 
 # Database
@@ -178,6 +234,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'index'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

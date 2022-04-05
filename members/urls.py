@@ -2,6 +2,8 @@ from django.urls import path
 from .views import UserRegisterView, UserEditView, PasswordsChangeView, ShowProfilePageView,  EditProfilePageView, CreateProfilePageView, ProfileEditView
 #from django.contrib.auth import views as auth_views
 from . import views
+from django.conf.urls import include
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('register/', UserRegisterView.as_view(), name='register'),
@@ -15,4 +17,5 @@ urlpatterns = [
     path('profile/edit/<int:pk>/', ProfileEditView.as_view(), name='profile-edit'),
     #profile
     path('<int:pk>/profile/', ShowProfilePageView.as_view(), name='show_profile_page'),
+    path('oauth/', include('social_django.urls', namespace='social')),  # <-- here
 ]
