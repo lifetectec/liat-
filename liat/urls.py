@@ -33,7 +33,7 @@ urlpatterns = [
     path('apply/', include('apply.urls')),
     path('', include("django.contrib.auth.urls")),
     #social app auth
-    url('social', include('social_django.urls', namespace='social')),
+    path('social/', include('social_django.urls', namespace='social')),
     re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 
