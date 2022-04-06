@@ -16,7 +16,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
+# Quick-start development settings - unsuitable for production 
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -37,6 +37,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Liat apps
+    #start up app
+    'theblog', 
+    'members',
+    'landing',
+    #Brokers
+    'photos',
+    'apply',
+    'broker',
+    #other
+    'ckeditor',
+    'crispy_forms',
+    #allauthentication
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.facebook',
+   
+   
 ]
 
 MIDDLEWARE = [
@@ -55,7 +77,7 @@ ROOT_URLCONF = 'liat.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,12 +85,92 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # `allauth` needs this from django
+                'django.template.context_processors.request',
             ],
+        'builtins': [
+         'theblog.templatetags.custom_tags',
+        ]
         },
     },
 ]
 
+#authentication backends
+# Provider specific settings
+
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
+
 WSGI_APPLICATION = 'liat.wsgi.application'
+
+                #Github:
+#client_Id
+#5004a5896da870055d25
+
+#Key
+#ba1a761d61657b1dfe1f247a0399acdbecb5fc29
+
+               #facebook
+#client ID
+#1135794127201639
+#a6c3ec259b45d1a0e900cfefbe0d877e
+
+#Auto Field settings
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'offline',
+#         }
+#     }
+# }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+         'SCOPE': [
+            'profile',
+            'email',
+         ],
+         'AUTH_PARAMS': {
+             'access_type': 'offline',
+        },
+    },
+    
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        # 'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v7.0',
+    }
+}
 
 
 # Database
@@ -126,7 +228,20 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'index'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
