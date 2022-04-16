@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-*#0&vic=2f7y6hp@bz$=rj9qd8=u0is3d^ifm-e_0jz=fv95tl
 DEBUG = True
 
 ALLOWED_HOSTS = ['microsecond-app.herokuapp.com', '127.0.0.1']
-
+#633413456001-4osp7m631rh2p867c1bte91n0ksajpnj.apps.googleusercontent.com
+#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
 
 # Application definition
 
